@@ -13,6 +13,10 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${CLAUDE_PROJECT_DIR:-${SCRIPT_DIR}/../..}/.env"
+if [[ -f "$ENV_FILE" ]]; then
+  source "$ENV_FILE"
+fi
 source "${SCRIPT_DIR}/notify_slack.sh"
 
 LOG_FILE="${BQ_LOG_FILE:-${HOME}/.claude/logs/bq_hook.log}"

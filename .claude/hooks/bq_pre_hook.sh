@@ -17,6 +17,10 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${CLAUDE_PROJECT_DIR:-${SCRIPT_DIR}/../..}/.env"
+if [[ -f "$ENV_FILE" ]]; then
+  source "$ENV_FILE"
+fi
 source "${SCRIPT_DIR}/notify_slack.sh"
 
 WARN_GB="${BQ_WARN_GB:-1}"
